@@ -1,0 +1,22 @@
+.menu-button {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: initial;
+}
+
+.menu-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(26, 26, 26);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    transition-duration: 0.3s;
+}

@@ -1,0 +1,7 @@
+.title-text {
+}
+
+.title-text-hover {
+    background-color: rgba(0, 159, 227, 255);
+    color: rgba(30, 30, 30, 255);
+}
