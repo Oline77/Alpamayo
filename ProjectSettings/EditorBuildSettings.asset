@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/DebutMenu.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
   - enabled: 1
-    path: Assets/Scenes/terrainDeplacement.unity
+    path: Assets/Scenes/Conception.unity
     guid: fa0e0510c978cc14dbce9878e68971f0
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fda833fa7c9f9ef43a72c80d0fcf5e81,
