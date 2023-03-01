@@ -2,18 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SwitchCam : MonoBehaviour
 {
 
     public GameObject[] Cameras;
-    public Text buttonText;
     int currentCam;
+
+    public TMP_Text Switch;
+    private int counter = 0;
+    private string[] newTexts;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentCam = 0;
+        Switch.text += "3D";
+        newTexts = new string[4];
+        newTexts[0] = Switch.text;
+        newTexts[1] = "2D";
+        newTexts[2] = "FPS";
+        //newTexts[3] = "2D";
         setCam(currentCam);
     }
 
@@ -30,6 +39,17 @@ public class SwitchCam : MonoBehaviour
             {
                 Cameras[i].SetActive(false);
             }
+        }
+    }
+
+    //Change le text à chaque clique s
+    public void newText()
+    {
+        counter++;
+        Switch.text = newTexts[counter];
+        if(counter == 2)
+        {
+            counter = -1;
         }
     }
 

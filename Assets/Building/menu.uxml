@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/button.uss?fileID=7433441132597879392&amp;guid=8a21d03ef7e184a43b960f0b8bd1dffb&amp;type=3#button" />
+    <ui:VisualElement name="background" style="height: 353px; flex-grow: 1; background-color: rgba(255, 255, 255, 0); align-items: flex-end;">
+        <ui:VisualElement name="menu" style="background-color: rgba(55, 55, 55, 0.59); height: 457px; width: 116px; flex-grow: 1; border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+            <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" style="flex-grow: 1;">
+                <ui:Button display-tooltip-when-elided="true" name="ButtonSapin" text="ButtonSapin" class="button" style="background-image: url(&apos;project://database/Assets/img/sapinPhoto.jpg?fileID=2800000&amp;guid=22ac180e71ff68a458140cf1aef55048&amp;type=3#sapinPhoto&apos;);" />
+                <ui:Button display-tooltip-when-elided="true" name="ButtonBouleau" text="ButtonBouleau" class="button" style="background-image: url(&apos;project://database/Assets/img/bouleau.jpg?fileID=2800000&amp;guid=79afb526f1065c04c8dd36caa87ac2d5&amp;type=3#bouleau&apos;);" />
+            </ui:ScrollView>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
