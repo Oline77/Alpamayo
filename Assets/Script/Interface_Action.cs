@@ -37,6 +37,7 @@ public class Interface_Action : MonoBehaviour
     public void ButtonLeave()
     {
         Quitter.SetActive(false);
+        
     }
 
     //Méthode permettant d'ouvrir d'afficher un objet
