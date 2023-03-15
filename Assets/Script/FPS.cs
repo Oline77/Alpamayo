@@ -8,7 +8,6 @@ public class FPS : MonoBehaviour
 
   // Variables pour stocker le temps et le nombre d'images affichées
     private float _deltaTime = 0.0f;
-    private int _framesPerSecond = 0;
     
     // Mise à jour de la boucle de jeu
     void Update()
