@@ -17,11 +17,10 @@ public class SwitchCam : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Switch.text += "3D";
-        newTexts = new string[4];
+        Switch.text += "2D";
+        newTexts = new string[3];
         newTexts[0] = Switch.text;
-        newTexts[1] = "2D";
-        newTexts[2] = "FPS";
+        newTexts[1] = "3D";
         //newTexts[3] = "2D";
         setCam(currentCam);
     }
@@ -47,7 +46,7 @@ public class SwitchCam : MonoBehaviour
     {
         counter++;
         Switch.text = newTexts[counter];
-        if(counter == 2)
+        if(counter == 1)
         {
             counter = -1;
         }
