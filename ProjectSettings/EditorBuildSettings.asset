@@ -15,14 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 6ac332e170b96a04a833e7d5dc09346f
   - enabled: 1
-    path: Assets/Scenes/Conception.unity
-    guid: bdd118e1fb56aa0429943070d194c559
+    path: Assets/Scenes/Conception2D 1.unity
+    guid: 826eecaa1d019ff4691262ef1368dce3
   - enabled: 1
     path: Assets/Scenes/Visualisation.unity
     guid: 8b6d97082c5267540bcc30920cfd355f
-  - enabled: 1
-    path: Assets/Scenes/Conception2D 1.unity
-    guid: 826eecaa1d019ff4691262ef1368dce3
+  - enabled: 0
+    path: Assets/Scenes/Conception.unity
+    guid: bdd118e1fb56aa0429943070d194c559
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fda833fa7c9f9ef43a72c80d0fcf5e81,
       type: 2}

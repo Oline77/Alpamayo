@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 
 using UnityEngine.UI;
 
-
-
 public class Export2PDF : MonoBehaviour
 {
    
@@ -18,21 +16,31 @@ public class Export2PDF : MonoBehaviour
     {
         // Créer un nouveau document PDF
         Document document = new Document();
-        PdfWriter.GetInstance(document, new FileStream("scene_objects.pdf", FileMode.Create));
+        PdfWriter.GetInstance(document, new FileStream("facture.pdf", FileMode.Create));
         document.Open();
 
-        // Créer un tableau dans le document
+        // Ajouter un titre à la facture
+        Paragraph title = new Paragraph("Facture");
+        title.Alignment = Element.ALIGN_CENTER;
+        document.Add(title);
+
+        // Ajouter un tableau avec les informations de chaque objet de la scène
         PdfPTable table = new PdfPTable(3);
         table.AddCell("Nom de l'objet");
         table.AddCell("Position X");
         table.AddCell("Position Y");
 
         // Récupérer tous les objets de la scène
-        Scene currentScene = SceneManager.GetActiveScene();
         List<GameObject> allObjects = new List<GameObject>();
-        currentScene.GetRootGameObjects(allObjects);
+        foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType<GameObject>())
+        {
+            if (obj.activeInHierarchy)
+            {
+                allObjects.Add(obj);
+            }
+        }
 
-        // Parcourir les objets récupérés et ajouter leurs noms et positions dans le tableau
+        // Ajouter les informations de chaque objet dans le tableau
         foreach (GameObject obj in allObjects)
         {
             table.AddCell(obj.name);
