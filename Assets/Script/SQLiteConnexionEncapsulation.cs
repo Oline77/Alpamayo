@@ -84,5 +84,4 @@ public class DatabaseManager
         command.CommandText = query;
         return command.ExecuteReader();
     }
-
 }
