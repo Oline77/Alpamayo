@@ -980,6 +980,8 @@ MonoBehaviour:
   startColor: {r: 0.9936369, g: 1, b: 0.7122642, a: 1}
   middleColor: {r: 1, g: 0.5013489, b: 0, a: 1}
   endColor: {r: 0, g: 0.11067528, b: 0.3962264, a: 1}
+  startAngle: 90
+  endAngle: 180
 --- !u!114 &212293783
 MonoBehaviour:
   m_ObjectHideFlags: 0
