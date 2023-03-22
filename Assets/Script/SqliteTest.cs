@@ -33,15 +33,15 @@ public class SqliteTest : MonoBehaviour
 
         // Lire et imprimer toutes les valeurs du tableau
         IDbCommand cmnd_read = dbcon.CreateCommand();
-        IDataReader reader;
+        IDataReader lecteur;
         string query = "SELECT * FROM my_table";
         cmnd_read.CommandText = query;
-        reader = cmnd_read.ExecuteReader();
+        lecteur = cmnd_read.ExecuteReader();
 
-        while (reader.Read())
+        while (lecteur.Read())
         {
-            Debug.Log("id: " + reader[0].ToString());
-            Debug.Log("val: " + reader[1].ToString());
+            Debug.Log("id: " + lecteur[0].ToString());
+            Debug.Log("val: " + lecteur[1].ToString());
         }
 
         dbcon.Close();
