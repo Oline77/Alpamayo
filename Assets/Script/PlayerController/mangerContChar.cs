@@ -6,12 +6,14 @@ public class mangerContChar : MonoBehaviour
 {
     //componet
     private CharacterController _charController;
+    private managerJoystick _mngrJoyStick;
+    private managerJoystick joystick;
 
     // move 
     private float inputX;
     private float inputZ;
     private float moveSpeed;
-    private managerJoystick _mngrJoyStick;
+
 
     private Vector3 v_movement;
 
@@ -20,8 +22,9 @@ public class mangerContChar : MonoBehaviour
     {
         moveSpeed = 0.1f;
         GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
-        _charController = tempPlayer.GetComponent<CharacterController>();
         _mngrJoyStick = GameObject.Find("imgJoystickBg").GetComponent<managerJoystick>();
+        joystick = GameObject.FindObjectOfType<managerJoystick>();
+
     }
 
     // Update is called once per frame
@@ -31,6 +34,7 @@ public class mangerContChar : MonoBehaviour
         //inputZ = Input.GetAxis("Vertical");
         inputX = _mngrJoyStick.inputHorizontal();
         inputZ = _mngrJoyStick.inputVertical();
+
     }
 
     private void FixedUpdate()

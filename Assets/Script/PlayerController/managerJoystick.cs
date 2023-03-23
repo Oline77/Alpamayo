@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     //https://www.youtube.com/watch?v=9gOF_plwd1g
+    //https://www.youtube.com/watch?v=GDZEPIA8peo
+    //https://www.youtube.com/watch?v=WHlZTv5zBbs
 
     private Image imgJoystickBg;
     private Image imgJoystick;
@@ -35,6 +37,7 @@ public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler,
             imgJoystick.rectTransform.anchoredPosition = new Vector2(posInput.x *(imgJoystickBg.rectTransform.sizeDelta.x / 2),posInput.y *(imgJoystickBg.rectTransform.sizeDelta.y / 2));
         }
     }
+
 
     public void OnPointerDown(PointerEventData eventData)
     {
