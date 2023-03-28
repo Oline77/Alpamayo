@@ -7,10 +7,8 @@ public class DayNightController : MonoBehaviour
     public Scrollbar scrollbar;
     public Text timeText;
 
-    public Color color1 = new Color(0.2f, 0.2f, 0.4f);
-    public Color color2 = new Color(0.4f, 0.4f, 0.6f);
-    public Color color3 = new Color(1f, 0.8f, 0.6f);
-    public Color color4 = new Color(0.8f, 0.2f, 0.2f);
+    public Color[] colors;
+    public int[] transitionHours;
 
     public float startAngle = 0f;
     public float endAngle = 180f;
@@ -27,7 +25,7 @@ public class DayNightController : MonoBehaviour
         {
             targetLight = GetComponent<Light>();
         }
-        startColor = targetColor = color1;
+        startColor = targetColor = colors[0];
     }
 
     private void Update()
@@ -47,31 +45,16 @@ public class DayNightController : MonoBehaviour
                 timeText.text = currentHour.ToString("00") + "h";
 
                 // Changement de couleur en fondu
-                if (currentHour >= 0 && currentHour < 8)
+                for (int i = 0; i < transitionHours.Length; i++)
                 {
-                    targetColor = color1;
-                    colorLerpTime = 1.0f;
-                }
-                else if (currentHour >= 8 && currentHour < 12)
-                {
-                    startColor = targetColor;
-                    targetColor = color2;
-                    currentColorLerpTime = 0.0f;
-                    colorLerpTime = 1.0f;
-                }
-                else if (currentHour >= 12 && currentHour < 17)
-                {
-                    startColor = targetColor;
-                    targetColor = color3;
-                    currentColorLerpTime = 0.0f;
-                    colorLerpTime = 1.0f;
-                }
-                else if (currentHour >= 17 && currentHour < 23)
-                {
-                    startColor = targetColor;
-                    targetColor = color4;
-                    currentColorLerpTime = 0.0f;
-                    colorLerpTime = 1.0f;
+                    if (currentHour < transitionHours[i])
+                    {
+                        startColor = targetColor;
+                        targetColor = colors[i];
+                        currentColorLerpTime = 0.0f;
+                        colorLerpTime = (float)(transitionHours[i] - currentHour) / 24f;
+                        break;
+                    }
                 }
             }
 
