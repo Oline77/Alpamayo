@@ -4,38 +4,43 @@ using UnityEngine;
 
 public class mangerContChar : MonoBehaviour
 {
-    //componet
-    private CharacterController _charController;
+    // Components
+    private CharacterController _charController; // Référence au CharacterController attaché au GameObject
+    private managerJoystick _mngrJoyStick; // Référence au script managerJoystick attaché à l'objet imgJoystickBg
 
-    // move 
-    private float inputX;
-    private float inputZ;
-    private float moveSpeed;
-    private managerJoystick _mngrJoyStick;
+    // Movement variables
+    private float inputX; // Valeur de l'axe horizontal
+    private float inputZ; // Valeur de l'axe vertical
+    private float moveSpeed; // Vitesse de déplacement
+    private Vector3 v_movement; // Vecteur de mouvement
 
-    private Vector3 v_movement;
-
-    // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = 0.1f;
+        // Récupération des composants nécessaires
         GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
         _charController = tempPlayer.GetComponent<CharacterController>();
         _mngrJoyStick = GameObject.Find("imgJoystickBg").GetComponent<managerJoystick>();
+        moveSpeed = 0.1f;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //inputX = Input.GetAxis("Horizontal");
-        //inputZ = Input.GetAxis("Vertical");
+        // Récupération des valeurs de l'axe horizontal et vertical à partir du joystick
         inputX = _mngrJoyStick.inputHorizontal();
         inputZ = _mngrJoyStick.inputVertical();
     }
 
     private void FixedUpdate()
     {
+        // Déplacement du personnage
         v_movement = new Vector3(inputX * moveSpeed, 0, inputZ * moveSpeed);
         _charController.Move(v_movement);
+
+        // Rotation du personnage en direction du mouvement
+        if (v_movement.magnitude > 0)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(v_movement);
+            _charController.transform.rotation = Quaternion.Lerp(_charController.transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
     }
 }
