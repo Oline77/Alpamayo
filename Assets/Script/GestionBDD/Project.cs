@@ -1,6 +1,6 @@
 /// @file: Projects.cs
 /// @brief: Intialise les variables du formulaire pour créer un projet et vérifie si les valeurs sont valides.
-/// @author: Marin B.
+/// @author: Barbaud M.
 /// @date: 30/03/2023
 /// @update: ~
 
@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Project
+public class Project : MonoBehaviour
 {
     public int Id { get; set; }
     public string NomProjet { get; set; }

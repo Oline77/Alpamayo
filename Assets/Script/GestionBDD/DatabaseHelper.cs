@@ -10,7 +10,7 @@ using UnityEngine;
 using System.Data.SQLite;
 using System;
 
-public class DatabaseHelper
+public class DatabaseHelper : MonoBehaviour
 {
     // Méthode de connexion à la base de donnée
     public static SQLiteConnection GetConnection()
