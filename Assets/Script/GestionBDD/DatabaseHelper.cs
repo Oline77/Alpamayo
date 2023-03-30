@@ -31,10 +31,10 @@ public class DatabaseHelper
                 "(Id INTEGER," +
                 "NomProjet TEXT NOT NULL, " +
                 "NomClient TEXT NOT NULL, " +
-                "NumeroChantier NUMERIC NOT NULL, " +
+                "NumeroChantier INTEGER NOT NULL, " +
                 "Adresse TEXT NOT NULL, " +
-                "Voie NUMERIC NOT NULL, " +
-                "CodePostale NUMERIC NOT NULL, " +
+                "Voie INTEGER NOT NULL, " +
+                "CodePostale INTEGER NOT NULL, " +
                 "Ville TEXT NOT NULL, " +
                 "Description TEXT NOT NULL" +
                 "PRIMARY KEY(Id AUTOINCREMENT))", connection))
