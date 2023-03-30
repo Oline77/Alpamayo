@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Data.SQLite;
-using Mono.Data.Sqlite;
+using Mono.Data.Sqlite; // pas sur
+using System;
 
 public class DatabaseHelper
 {
@@ -15,6 +16,12 @@ public class DatabaseHelper
 
     public void InsertProject(Project project)
     {
+        // Vérification des donnéesPe
+        if (!project.IsValid())
+        {
+            throw new ArgumentException("Le projet n'est pas valide");
+        }
+
         using (var connection = GetConnection())
         {
             connection.Open();
@@ -69,5 +76,41 @@ public class DatabaseHelper
                 command.ExecuteNonQuery();
             }
         }
+    }
+
+    // Permet de récuoérer les données
+    public List<Project> GetAllProjects()
+    {
+        List<Project> projects = new List<Project>();
+
+        using (var connection = new SQLiteConnection("Data Source=StockageInfoFormulaire.sqlite"))
+        {
+            connection.Open();
+
+            using (var command = new SQLiteCommand("SELECT * FROM CreateProject", connection))
+            {
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Project project = new Project();
+
+                        project.Id = Convert.ToInt32(reader["Id"]);
+                        project.NomProjet = Convert.ToString(reader["NomProjet"]);
+                        project.NomClient = Convert.ToString(reader["NomClient"]);
+                        project.NumeroChantier = Convert.ToInt32(reader["NumeroChantier"]);
+                        project.Adresse = Convert.ToString(reader["Adresse"]);
+                        project.Voie = Convert.ToInt32(reader["Voie"]);
+                        project.CodePostale = Convert.ToInt32(reader["CodePostale"]);
+                        project.Ville = Convert.ToString(reader["Ville"]);
+                        project.Description = Convert.ToString(reader["Description"]);
+
+                        projects.Add(project);
+                    }
+                }
+            }
+        }
+
+        return projects;
     }
 }
