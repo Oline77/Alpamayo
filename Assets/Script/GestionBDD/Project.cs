@@ -1,3 +1,9 @@
+/// @file: Projects.cs
+/// @brief: Intialise les variables du formulaire pour créer un projet et vérifie si les valeurs sont valides.
+/// @author: Marin B.
+/// @date: 30/03/2023
+/// @update: ~
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -1,8 +1,13 @@
+/// @file: DatabaseHelper.cs
+/// @brief: Permet de se connecter à la base de donnée, de créer une table dans la base de donnée, d'insérer les informations et de récupérer les données pour les afficher.
+/// @author: Marin B.
+/// @date: 30/03/2023
+/// @update: ~
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Data.SQLite;
-using Mono.Data.Sqlite; // pas sur
 using System;
 
 public class DatabaseHelper
@@ -16,7 +21,7 @@ public class DatabaseHelper
 
     public void InsertProject(Project project)
     {
-        // Vérification des donnéesPe
+        // Vérification des données
         if (!project.IsValid())
         {
             throw new ArgumentException("Le projet n'est pas valide");
@@ -78,7 +83,7 @@ public class DatabaseHelper
         }
     }
 
-    // Permet de récuoérer les données
+    // Permet de récupérer les données
     public List<Project> GetAllProjects()
     {
         List<Project> projects = new List<Project>();
