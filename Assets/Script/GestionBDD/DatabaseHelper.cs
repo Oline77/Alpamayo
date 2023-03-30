@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Data.SQLite;
+using Mono.Data.Sqlite;
 
 public class DatabaseHelper
 {
+    // Méthode de connexion à la base de donnée
+    public static SQLiteConnection GetConnection()
+    {
+        string connectionString = "Data Source=StockageInfoFormulaire.sqlite";
+        return new SQLiteConnection(connectionString);
+    }
+
     public void InsertProject(Project project)
     {
-        using (var connection = new SQLiteConnection("Data Source=StockageInfoFormulaire.sqlite"))
+        using (var connection = GetConnection())
         {
             connection.Open();
 
