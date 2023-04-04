@@ -1,6 +1,6 @@
 /// @file: DatabaseHelper.cs
 /// @brief: Permet de se connecter à la base de donnée, de créer une table dans la base de donnée, d'insérer les informations et de récupérer les données pour les afficher.
-/// @author: Marin B.
+/// @author: Barbaud M.
 /// @date: 30/03/2023
 /// @update: ~
 
