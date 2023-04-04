@@ -10,7 +10,7 @@ public class PremierTest
     [Test]
     public void PremierTestSimplePasses()
     {
-        GameObject go = new GameObject();
+        
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

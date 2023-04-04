@@ -15,7 +15,7 @@ public class DatabaseHelper : MonoBehaviour
     // Méthode de connexion à la base de donnée
     public static SQLiteConnection GetConnection()
     {
-        string connectionString = "Data Source=StockageInfoFormulaire.sqlite";
+        string connectionString = "Data Source=StockageInfoFormulaire.db";
         return new SQLiteConnection(connectionString);
     }
 
@@ -88,7 +88,7 @@ public class DatabaseHelper : MonoBehaviour
     {
         List<Project> projects = new List<Project>();
 
-        using (var connection = new SQLiteConnection("Data Source=StockageInfoFormulaire.sqlite"))
+        using (var connection = new SQLiteConnection("Data Source=StockageInfoFormulaire.db"))
         {
             connection.Open();
 
