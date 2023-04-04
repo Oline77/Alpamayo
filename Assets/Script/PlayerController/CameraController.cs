@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CameraController : MonoBehaviour
@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        // V�rifie si l'utilisateur interagit avec l'interface utilisateur
+        // Vérifie si l'utilisateur interagit avec l'interface utilisateur
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
