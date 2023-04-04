@@ -7,8 +7,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using UnityEngine.UI;
+using System;
 
 public class ButtonValider : MonoBehaviour
 {
@@ -21,6 +21,8 @@ public class ButtonValider : MonoBehaviour
     public InputField codePostalInput;
     public InputField villeInput;
     public InputField descriptionInput;
+
+
 
     // Fonction qui est appelée lorsque l'utilisateur clique sur le bouton Valider
     public void OnValiderButtonClick()
