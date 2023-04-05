@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,14 +6,14 @@ using UnityEngine.EventSystems;
 
 public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    // Les variables privées de la classe
+    // Les variables privÃ©es de la classe
     private Image imgJoystickBg;   // Le cercle du fond du joystick
-    private Image imgJoystick;     // Le cercle que l'on peut déplacer
+    private Image imgJoystick;     // Le cercle que l'on peut dÃ©placer
     private Vector2 posInput;      // La position du joystick
 
     void Start()
     {
-        // On récupère les images dans les enfants de l'objet de ce script
+        // On rÃ©cupÃ¨re les images dans les enfants de l'objet de ce script
         imgJoystickBg = GetComponent<Image>();
         imgJoystick = transform.GetChild(0).GetComponent<Image>();
     }
@@ -27,13 +27,13 @@ public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler,
             posInput.x = posInput.x / (imgJoystickBg.rectTransform.sizeDelta.x);
             posInput.y = posInput.y / (imgJoystickBg.rectTransform.sizeDelta.y);
 
-            // Si la distance du joystick par rapport au centre est supérieure à 1
+            // Si la distance du joystick par rapport au centre est supÃ©rieure Ã  1
             if (posInput.magnitude > 1.0f)
             {
                 posInput = posInput.normalized;
             }
 
-            // On déplace le cercle du joystick par rapport à sa position d'origine
+            // On dÃ©place le cercle du joystick par rapport Ã  sa position d'origine
             imgJoystick.rectTransform.anchoredPosition = new Vector2(posInput.x * (imgJoystickBg.rectTransform.sizeDelta.x / 2), posInput.y * (imgJoystickBg.rectTransform.sizeDelta.y / 2));
         }
     }
@@ -41,19 +41,19 @@ public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler,
     // Lorsque l'on appuie sur le joystick
     public void OnPointerDown(PointerEventData eventData)
     {
-        // On appelle la méthode OnDrag pour mettre le joystick à la position du clic
+        // On appelle la mÃ©thode OnDrag pour mettre le joystick Ã  la position du clic
         OnDrag(eventData);
     }
 
-    // Lorsque l'on relâche le joystick
+    // Lorsque l'on relÃ¢che le joystick
     public void OnPointerUp(PointerEventData eventData)
     {
-        // On remet la position du joystick à zéro
+        // On remet la position du joystick Ã  zÃ©ro
         posInput = Vector2.zero;
         imgJoystick.rectTransform.anchoredPosition = Vector2.zero;
     }
 
-    // La méthode pour récupérer l'input horizontal
+    // La mÃ©thode pour rÃ©cupÃ©rer l'input horizontal
     public float inputHorizontal()
     {
         if (Mathf.Abs(posInput.x) > 0.1f)
@@ -62,7 +62,7 @@ public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler,
             return Input.GetAxis("Horizontal");
     }
 
-    // La méthode pour récupérer l'input vertical
+    // La mÃ©thode pour rÃ©cupÃ©rer l'input vertical
     public float inputVertical()
     {
         if (Mathf.Abs(posInput.y) > 0.1f)
@@ -70,5 +70,4 @@ public class managerJoystick : MonoBehaviour, IDragHandler, IPointerDownHandler,
         else
             return Input.GetAxis("Vertical");
     }
-
 }

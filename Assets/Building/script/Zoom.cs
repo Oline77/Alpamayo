@@ -1,21 +1,4 @@
-/*
-Original Script By: Ditzel
-Youtube Video Link: https://www.youtube.com/watch?v=KkYco_7-ULA&ab_channel=DitzelGames
-Uses of this script:
- For controlling camera movement: Pan, zoom and rotate
-How to use:
-Set this on an empty game object positioned at (0,0,0) and attach your active camera.
-The script only runs on mobile devices or the remote app.
-DecreaseCameraPanSpeed - The more the value, the greater it slows the pan speed
-Upper height (Zoom out restriction) - Relative to camera position (not worldspace)
-Lower height (Zoom in restriction) - Relative to camera position (not worldspace)
-------[CHANGE LOG]------
-Edited by Kudoshi : 24/3/2021
-- Added Zoom In Out restriction
-- Added camera pan speed
-*/
-
-using UnityEngine; 
+using UnityEngine;
 
 class Zoom : MonoBehaviour
 {
@@ -26,6 +9,7 @@ class Zoom : MonoBehaviour
     public float DecreaseCameraPanSpeed = 1; //Default speed is 1
     public float CameraUpperHeightBound; //Zoom out
     public float CameraLowerHeightBound; //Zoom in
+
 
     private Vector3 cameraStartPosition;
     private void Awake()
@@ -109,7 +93,7 @@ class Zoom : MonoBehaviour
         var rayNow = Camera.ScreenPointToRay(touch.position);
         if (Plane.Raycast(rayBefore, out var enterBefore) && Plane.Raycast(rayNow, out var enterNow))
             return rayBefore.GetPoint(enterBefore) - rayNow.GetPoint(enterNow);
-       
+
         //not on plane
         return Vector3.zero;
     }
