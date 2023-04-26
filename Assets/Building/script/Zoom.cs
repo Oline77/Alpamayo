@@ -1,6 +1,6 @@
 using UnityEngine;
 
-class Zoom : MonoBehaviour
+public class Zoom : MonoBehaviour
 {
 #if UNITY_IOS || UNITY_ANDROID
     public Camera Camera;

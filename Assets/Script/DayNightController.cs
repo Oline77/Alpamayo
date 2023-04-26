@@ -1,12 +1,17 @@
+/// @author: Verstrepen Nicolas
+/// @brief Script pour controller la lumière 
+/// @ Update 06/04/2023
+
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DayNightController : MonoBehaviour
+class DayNightController : MonoBehaviour
 {
     // Références vers les éléments de la scène
     public Light targetLight;
     public Scrollbar scrollbar;
     public Text timeText;
+    public Material targetMaterial;
 
     // Couleurs pour les différentes heures de la journée
     public Color[] colors;
@@ -23,6 +28,7 @@ public class DayNightController : MonoBehaviour
     private Color startColor;
     private float colorLerpTime = 1.0f;
     private float currentColorLerpTime = 0.0f;
+    private float materialEmission = 1.0f;
 
     private void Awake()
     {
@@ -39,6 +45,24 @@ public class DayNightController : MonoBehaviour
 
     private void Update()
     {
+        // Modification de la luminosité du matériau en fonction de l'heure
+        if (targetMaterial != null)
+        {
+            if (currentHour >= 8 && currentHour <= 16)
+            {
+                // Heures entre 8h et 16h : baisse de la luminosité à 0
+                materialEmission = 0.0f;
+            }
+            else
+            {
+                // Autres heures : remontée de la luminosité à 1
+                materialEmission = 1.0f;
+            }
+
+            // Application de la luminosité au matériau
+            targetMaterial.SetColor("_EmissionColor", new Color(materialEmission, materialEmission, materialEmission));
+        }
+
         // Vérification que toutes les références sont renseignées
         if (targetLight != null && scrollbar != null && timeText != null)
         {
