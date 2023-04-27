@@ -1,5 +1,5 @@
 /// @file: Projects.cs
-/// @brief: Intialise les variables du formulaire pour créer un projet et vérifie si les valeurs sont valides.
+/// @brief: Intialise les variables du formulaire pour crï¿½er un projet et vï¿½rifie si les valeurs sont valides.
 /// @author: Barbaud M.
 /// @date: 30/03/2023
 /// @update: ~
@@ -20,7 +20,7 @@ public class Project : MonoBehaviour
     public string Ville { get; set; }
     public string Description { get; set; }
 
-    // Permet de vérifier si les données sont valides avant de les insérer dans la base de donnée
+    // Permet de vï¿½rifier si les donnï¿½es sont valides avant de les insï¿½rer dans la base de donnï¿½e
     /*public bool IsValid()
     {
         if (string.IsNullOrEmpty(NomProjet) || string.IsNullOrEmpty(NomClient) || string.IsNullOrEmpty(Adresse) || string.IsNullOrEmpty(Ville) || string.IsNullOrEmpty(Description))

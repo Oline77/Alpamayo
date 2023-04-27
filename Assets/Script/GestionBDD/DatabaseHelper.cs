@@ -1,5 +1,5 @@
 /// @file: DatabaseHelper.cs
-/// @brief: Permet de se connecter à la base de donnée, de créer une table dans la base de donnée, d'insérer les informations et de récupérer les données pour les afficher.
+/// @brief: Permet de se connecter a la base de donnee, de creer une table dans la base de donnee, d'inserer les informations et de recuperer les donnees pour les afficher.
 /// @author: Barbaud M.
 /// @date: 30/03/2023
 /// @update: ~
@@ -12,7 +12,7 @@ using System;
 
 public class DatabaseHelper : MonoBehaviour
 {
-    // Méthode de connexion à la base de donnée
+    // Methode de connexion a la base de donnee
     public static SQLiteConnection GetConnection()
     {
         string connectionString = "Data Source=StockageInfoFormulaire.db";
@@ -21,21 +21,21 @@ public class DatabaseHelper : MonoBehaviour
 
     public void InsertProject(Project project)
     {
-        // Vérification des données
+        // Verification des donnees
         /*if (!project.IsValid())
         {
-            throw new ArgumentException("les entrées ne sont pas valides");
+            throw new ArgumentException("les entrees ne sont pas valides");
         }
         else
         {
-            Debug.Log("Les entrées sont valides");
+            Debug.Log("Les entrees sont valides");
         }*/
 
         using (var connection = GetConnection())
         {
             connection.Open();
 
-            // Création de la table si elle n'existe pas déjà
+            // Creation de la table si elle n'existe pas deja
             using (var command = new SQLiteCommand("CREATE TABLE IF NOT EXISTS CreateProject " +
                 "(Id INTEGER," +
                 "NomProjet TEXT NOT NULL, " +
@@ -87,7 +87,7 @@ public class DatabaseHelper : MonoBehaviour
         }
     }
 
-    // Permet de récupérer les données
+    // Permet de recuperer les donnees
     public List<Project> GetAllProjects()
     {
         List<Project> projects = new List<Project>();

@@ -1,5 +1,5 @@
 /// @file: ButtonValider.cs
-/// @brief: Permet que lorsqu'on click sur le bouton valider, les informations du formulaire sont envoyé dans la class DatabaseHelper pour être traité
+/// @brief: Permet que lorsqu'on click sur le bouton valider, les informations du formulaire sont envoyï¿½ dans la class DatabaseHelper pour ï¿½tre traitï¿½
 /// @author: Barbaud M.
 /// @date: 04/04/2023
 /// @update: 05/04/2023
@@ -13,7 +13,7 @@ using TMPro;
 
 public class ButtonValider : MonoBehaviour
 {
-    // Déclaration des champs de saisie dans l'interface graphique de l'utilisateur
+    // Declaration des champs de saisie dans l'interface graphique de l'utilisateur
     public TextMeshProUGUI nomProjetInput;
     public TextMeshProUGUI nomClientInput;
     public TextMeshProUGUI numeroChantierInput;
@@ -23,36 +23,40 @@ public class ButtonValider : MonoBehaviour
     public TextMeshProUGUI villeInput;
     public TextMeshProUGUI descriptionInput;
 
-    // Fonction qui est appelée lorsque l'utilisateur clique sur le bouton Valider
+    // Fonction qui est appelee lorsque l'utilisateur clique sur le bouton Valider
     public void OnValiderButtonClick()
     {
         int numeroChantier, voie, codePostal;
 
         Project newProject = new Project();
 
-        // Attribution des valeurs entrées par l'utilisateur aux propriétés de l'objet Project
+        // Attribution des valeurs entrees par l'utilisateur aux proprietes de l'objet Project
         newProject.NomProjet = nomProjetInput.text;
         newProject.NomClient = nomClientInput.text;
         newProject.Adresse = adresseInput.text;
         newProject.Ville = villeInput.text;
         newProject.Description = descriptionInput.text;
 
+        //newProject.NumeroChantier = numeroChantier.text;
+        //newProject.Voie = voie.text;
+        //newProject.CodePostale = codePostal.text;
+
         try
         {
             // Conversion des valeurs de type string en entiers
-            numeroChantier = Int32.Parse(numeroChantierInput.text);
-            voie = Int32.Parse(voieInput.text);
-            codePostal = Int32.Parse(codePostalInput.text);
+            numeroChantier = int.Parse(numeroChantierInput.text);
+            voie = int.Parse(voieInput.text);
+            codePostal = int.Parse(codePostalInput.text);
 
-            // Attribution des valeurs converties aux propriétés de l'objet Project
+            // Attribution des valeurs converties aux proprietes de l'objet Project
             newProject.NumeroChantier = numeroChantier;
             newProject.Voie = voie;
             newProject.CodePostale = codePostal;
 
-            // Création d'un objet helper pour interagir avec la base de données
+            // Creation d'un objet helper pour interagir avec la base de donnees
             DatabaseHelper databaseHelper = new DatabaseHelper();
 
-            // Insertion des données pour être traitées
+            // Insertion des donnees pour etre traitees
             databaseHelper.InsertProject(newProject);
 
         }
