@@ -22,16 +22,20 @@ public class DatabaseHelper : MonoBehaviour
     public void InsertProject(Project project)
     {
         // Vérification des données
-        if (!project.IsValid())
+        /*if (!project.IsValid())
         {
-            throw new ArgumentException("Le projet n'est pas valide");
+            throw new ArgumentException("les entrées ne sont pas valides");
         }
+        else
+        {
+            Debug.Log("Les entrées sont valides");
+        }*/
 
         using (var connection = GetConnection())
         {
             connection.Open();
 
-            // Cr�ation de la table si elle n'existe pas d�j�
+            // Création de la table si elle n'existe pas déjà
             using (var command = new SQLiteCommand("CREATE TABLE IF NOT EXISTS CreateProject " +
                 "(Id INTEGER," +
                 "NomProjet TEXT NOT NULL, " +

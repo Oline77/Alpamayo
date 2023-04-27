@@ -26,44 +26,40 @@ public class ButtonValider : MonoBehaviour
     // Fonction qui est appelée lorsque l'utilisateur clique sur le bouton Valider
     public void OnValiderButtonClick()
     {
-        /*
-        // Vérifier que le champ "numeroChantierInput" contient un nombre valide;
-        if (!int.TryParse(numeroChantierInput.text, out numeroChantier))
-        {
-            Debug.LogError("Le champ Numero Chantier doit contenir un nombre valide.");
-        }
-
-        // Vérifier que le champ "voieInput" contient un nombre valide
-        if (!int.TryParse(voieInput.text, out voie))
-        {
-            Debug.LogError("Le champ Voie doit contenir un nombre valide.");
-        }
-
-        // Vérifier que le champ "codePostalInput" contient un nombre valide
-        if (!int.TryParse(codePostalInput.text, out codePostal))
-        {
-            Debug.LogError("Le champ Code Postal doit contenir un nombre valide.");
-        }*/
+        int numeroChantier, voie, codePostal;
 
         Project newProject = new Project();
 
         // Attribution des valeurs entrées par l'utilisateur aux propriétés de l'objet Project
         newProject.NomProjet = nomProjetInput.text;
         newProject.NomClient = nomClientInput.text;
-        //newProject.NumeroChantier = int.Parse(numeroChantierInput.text);
         newProject.Adresse = adresseInput.text;
-        //newProject.Voie = int.Parse(voieInput.text);
-        //newProject.CodePostale = int.Parse(codePostalInput.text);
         newProject.Ville = villeInput.text;
         newProject.Description = descriptionInput.text;
 
         try
         {
+            // Conversion des valeurs de type string en entiers
+            numeroChantier = Int32.Parse(numeroChantierInput.text);
+            voie = Int32.Parse(voieInput.text);
+            codePostal = Int32.Parse(codePostalInput.text);
+
+            // Attribution des valeurs converties aux propriétés de l'objet Project
+            newProject.NumeroChantier = numeroChantier;
+            newProject.Voie = voie;
+            newProject.CodePostale = codePostal;
+
             // Création d'un objet helper pour interagir avec la base de données
             DatabaseHelper databaseHelper = new DatabaseHelper();
 
             // Insertion des données pour être traitées
             databaseHelper.InsertProject(newProject);
+
+        }
+        catch (FormatException e)
+        {
+            // En cas d'erreur de conversion, afficher un message d'erreur
+            Debug.LogError("Erreur de conversion : " + e.Message);
         }
         catch (System.Exception e)
         {

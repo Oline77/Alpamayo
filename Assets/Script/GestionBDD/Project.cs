@@ -21,7 +21,7 @@ public class Project : MonoBehaviour
     public string Description { get; set; }
 
     // Permet de vérifier si les données sont valides avant de les insérer dans la base de donnée
-    public bool IsValid()
+    /*public bool IsValid()
     {
         if (string.IsNullOrEmpty(NomProjet) || string.IsNullOrEmpty(NomClient) || string.IsNullOrEmpty(Adresse) || string.IsNullOrEmpty(Ville) || string.IsNullOrEmpty(Description))
         { 
@@ -34,5 +34,5 @@ public class Project : MonoBehaviour
         }
 
         return true;
-    }
+    }*/
 }
