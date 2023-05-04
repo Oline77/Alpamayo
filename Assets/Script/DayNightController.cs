@@ -48,9 +48,9 @@ class DayNightController : MonoBehaviour
         // Modification de la luminosité du matériau en fonction de l'heure
         if (targetMaterial != null)
         {
-            if (currentHour >= 8 && currentHour <= 16)
+            if (currentHour >= 8 && currentHour <= 17)
             {
-                // Heures entre 8h et 16h : baisse de la luminosité à 0
+                // Heures entre 8h et 17h : baisse de la luminosité à 0
                 materialEmission = 0.0f;
             }
             else

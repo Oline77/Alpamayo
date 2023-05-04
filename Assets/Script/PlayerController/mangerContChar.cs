@@ -16,7 +16,7 @@ public class mangerContChar : MonoBehaviour
 
     void Start()
     {
-        // R�cup�ration des composants n�cessaires
+        // Récupération des composants
         GameObject tempPlayer = GameObject.FindGameObjectWithTag("Player");
         _charController = tempPlayer.GetComponent<CharacterController>();
         _mngrJoyStick = GameObject.Find("imgJoystickBg").GetComponent<managerJoystick>();
@@ -25,14 +25,14 @@ public class mangerContChar : MonoBehaviour
 
     void Update()
     {
-        // R�cup�ration des valeurs de l'axe horizontal et vertical � partir du joystick
+        // Récupération des valeurs de l'axe horizontal et vertical à partir du joystick
         inputX = _mngrJoyStick.inputHorizontal();
         inputZ = _mngrJoyStick.inputVertical();
     }
 
     private void FixedUpdate()
     {
-        // D�placement du personnage
+        // Déplacement du personnage
         v_movement = new Vector3(inputX * moveSpeed, 0, inputZ * moveSpeed);
         _charController.Move(v_movement);
 

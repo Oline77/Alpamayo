@@ -14,21 +14,20 @@ public class ObjectSelection : MonoBehaviour
     // Stocke l'objet actuellement sélectionné
     private Transform selectedObject;
 
-    // Vitesse de déplacement de l'objet
-    public float moveSpeed = 10f;
+    public Zoom cameraZoom; // Référence au script Zoom de la caméra
 
-    private void Awake()
+    void Start()
     {
+        cameraZoom = Camera.main.GetComponent<Zoom>();
         // Récupère la couleur par défaut de l'objet
         defaultColor = GetComponent<Renderer>().material.color;
     }
 
-    private void Update()
+    void Update()
     {
         // Vérifie si un toucher est détecté
         if (Input.touchCount > 0)
         {
-            // Obtient la position du toucher sur l'écran
             Touch touch = Input.GetTouch(0);
             Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 
@@ -43,9 +42,10 @@ public class ObjectSelection : MonoBehaviour
                     if (hit.collider.CompareTag(selectableTag))
                     {
                         // Si un objet était déjà sélectionné, le désélectionne
-                        if (selectedObject != null)
+                        if (selectedObject != null && selectedObject != hit.transform)
                         {
-                            DeselectObject();
+                            // Remettre l'objet précédemment sélectionné à sa couleur par défaut
+                            selectedObject.GetComponent<Renderer>().material.color = defaultColor;
                         }
 
                         // Stocke l'objet sélectionné
@@ -53,6 +53,8 @@ public class ObjectSelection : MonoBehaviour
 
                         // Change la couleur de l'objet sélectionné
                         selectedObject.GetComponent<Renderer>().material.color = highlightColor;
+                        // Désactiver le script Zoom de la caméra
+                        cameraZoom.enabled = false;
                     }
                 }
             }
@@ -61,25 +63,37 @@ public class ObjectSelection : MonoBehaviour
                 // Vérifie si un objet est sélectionné
                 if (selectedObject != null)
                 {
-                    // Obtient la distance de l'objet à la caméra
-                    float distance = Vector3.Distance(Camera.main.transform.position, selectedObject.position);
+                    // Vérifie si le toucher se produit directement sur l'objet sélectionné
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                    RaycastHit hit;
+                    if (Physics.Raycast(ray, out hit) && hit.transform == selectedObject)
+                    {
+                        // Convertit la position de l'écran en rayon à partir de la caméra
+                        ray = Camera.main.ScreenPointToRay(touch.position);
 
-                    // Calcul la position à laquelle l'objet doit être déplacé
-                    Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, distance));
+                        // Calcule la distance le long du rayon où l'objet doit être déplacé
+                        float distanceAlongRay = (selectedObject.position - ray.origin).magnitude;
 
-                    // Déplace l'objet à la nouvelle position
-                    selectedObject.position = Vector3.Lerp(selectedObject.position, newPosition, Time.deltaTime * moveSpeed);
-                    selectedObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        // Calcule la nouvelle position en utilisant le rayon et la distance calculée
+                        Vector3 newPosition = ray.GetPoint(distanceAlongRay);
+
+                        // Déplace l'objet à la nouvelle position
+                        selectedObject.position = newPosition;
+                        selectedObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    }
+                }
+            }
+
+            else if (touch.phase == TouchPhase.Ended)
+            {
+                // Désélectionne l'objet lorsque le toucher se termine
+                if (selectedObject != null)
+                {
+                    selectedObject.GetComponent<Renderer>().material.color = defaultColor;
+                    selectedObject = null;
+                    cameraZoom.enabled = true;
                 }
             }
         }
-    }
-
-
-    // Désélectionne l'objet actuellement sélectionné
-    private void DeselectObject()
-    {
-        selectedObject.GetComponent<Renderer>().material.color = defaultColor;
-        selectedObject = null;
     }
 }
