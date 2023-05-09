@@ -6,9 +6,9 @@ using TMPro;
 
 public class SwitchCam : MonoBehaviour
 {
-
     public GameObject[] Cameras;
-    int currentCam;
+    private int currentCam;
+    private Vector3[] originalPositions; // pour stocker les positions d'origine des caméras
 
     public TMP_Text Switch;
     private int counter = 0;
@@ -22,6 +22,11 @@ public class SwitchCam : MonoBehaviour
         newTexts[0] = Switch.text;
         newTexts[1] = "3D";
         //newTexts[3] = "2D";
+        originalPositions = new Vector3[Cameras.Length]; // initialiser le tableau des positions d'origine
+        for (int i = 0; i < Cameras.Length; i++)
+        {
+            originalPositions[i] = Cameras[i].transform.position; // stocker la position d'origine de chaque caméra
+        }
         setCam(currentCam);
     }
 
@@ -33,6 +38,7 @@ public class SwitchCam : MonoBehaviour
             if (i == idx)
             {
                 Cameras[i].SetActive(true);
+                Cameras[i].transform.position = originalPositions[i]; // réinitialiser la position de la caméra activée
             }
             else
             {
@@ -46,7 +52,7 @@ public class SwitchCam : MonoBehaviour
     {
         counter++;
         Switch.text = newTexts[counter];
-        if(counter == 1)
+        if (counter == 1)
         {
             counter = -1;
         }

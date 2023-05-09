@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class ObjectSelection : MonoBehaviour
 {
-    public static GameObject selectedObject; // Variable statique pour stocker l'objet sélectionné
+    public static GameObject selectedObject;
     private bool isDragging = false;
     private Vector3 touchOffset;
-    public GameObject cameraEmpty; // Référence à l'objet vide contenant le script de déplacement de la caméra
-    public GameObject selectionButton; // Référence à l'objet du bouton de sélection
-   
+    public GameObject cameraEmpty;
+    public GameObject selectionButton;
     public Material selectionMaterial;
 
     private Renderer selectedRenderer;
@@ -26,7 +25,6 @@ public class ObjectSelection : MonoBehaviour
 
                 if (selectedObject != null)
                 {
-                    // Si l'objet est déjà sélectionné et que le raycast ne touche pas l'objet, le désélectionner
                     if (!Physics.Raycast(ray, out hit) || hit.collider.gameObject != selectedObject)
                     {
                         DeselectObject(selectedObject);
@@ -37,7 +35,6 @@ public class ObjectSelection : MonoBehaviour
 
                 if (Physics.Raycast(ray, out hit) && hit.collider.CompareTag("Selectable"))
                 {
-                    // Sélectionner l'objet si le raycast touche un objet avec le tag "Selectable"
                     selectedObject = hit.collider.gameObject;
                     SelectObject(selectedObject);
                     touchOffset = hit.point - selectedObject.transform.position;
@@ -59,6 +56,17 @@ public class ObjectSelection : MonoBehaviour
                 isDragging = false;
             }
         }
+        else if (selectedObject != null && Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (!Physics.Raycast(ray, out hit) || hit.collider.gameObject != selectedObject)
+            {
+                DeselectObject(selectedObject);
+                selectedObject = null;
+            }
+        }
     }
 
     private void SelectObject(GameObject obj)
@@ -66,27 +74,32 @@ public class ObjectSelection : MonoBehaviour
         cameraEmpty.SetActive(false);
         selectionButton.SetActive(true);
 
-        // Stocker le matériau d'origine de l'objet sélectionné
+        // Stocker le matériau d'origine de l'objet sélectionné, sauf s'il a déjà été sélectionné
         selectedRenderer = obj.GetComponent<Renderer>();
-        if (selectedRenderer != null)
+        if (selectedRenderer != null && selectedRenderer.material != selectionMaterial)
         {
             originalMaterial = selectedRenderer.material;
+            Debug.Log("Storing original material: " + originalMaterial.name);
+
         }
 
-        // Appliquer le matériau de sélection à l'objet
-        if (selectedRenderer != null)
+        // Appliquer le matériau de sélection à l'objet, sauf s'il a déjà été sélectionné
+        if (selectedRenderer != null && selectedRenderer.material != selectionMaterial)
         {
             selectedRenderer.material = selectionMaterial;
         }
     }
 
+
     public void DeselectObject(GameObject obj)
     {
+        Debug.Log("Deselecting object: " + obj.name);
+
         cameraEmpty.SetActive(true);
         selectionButton.SetActive(false);
 
         // Restaurer le matériau d'origine de l'objet désélectionné
-        if (selectedRenderer != null)
+        if (selectedRenderer != null && selectedRenderer.material != selectionMaterial)
         {
             selectedRenderer.material = originalMaterial;
         }
@@ -95,5 +108,15 @@ public class ObjectSelection : MonoBehaviour
         selectedObject = null;
         selectedRenderer = null;
         originalMaterial = null;
+    }
+
+
+
+    public void RotateSelectedObjects()
+    {
+        if (selectedObject != null)
+        {
+            selectedObject.transform.Rotate(0f, 20f, 0f);
+        }
     }
 }

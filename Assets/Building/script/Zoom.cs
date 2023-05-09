@@ -10,6 +10,7 @@ public class Zoom : MonoBehaviour
     public float CameraUpperHeightBound; //Zoom out
     public float CameraLowerHeightBound; //Zoom in
 
+    private Vector3 planeSize = new Vector3(100, 100, 100);
 
     private Vector3 cameraStartPosition;
     private void Awake()
@@ -22,6 +23,16 @@ public class Zoom : MonoBehaviour
 
     private void Update()
     {
+
+        Vector3 cameraMinPosition = new Vector3(planeSize.x / 2, CameraLowerHeightBound, planeSize.z / 2);
+        Vector3 cameraMaxPosition = new Vector3(-planeSize.x / 2, CameraUpperHeightBound, -planeSize.z / 2);
+
+        Camera.transform.position = new Vector3(
+    Mathf.Clamp(Camera.transform.position.x, cameraMaxPosition.x, cameraMinPosition.x),
+    Mathf.Clamp(Camera.transform.position.y, cameraMaxPosition.y, cameraMinPosition.y),
+    Mathf.Clamp(Camera.transform.position.z, cameraMaxPosition.z, cameraMinPosition.z)
+);
+
 
         //Update Plane
         if (Input.touchCount >= 1)
