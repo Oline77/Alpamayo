@@ -46,6 +46,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 15}
+
   m_Panes:
   - {fileID: 15}
   m_Selected: 0
@@ -995,3 +996,4 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: dc546f1f735909e43a150b673b511268
+
