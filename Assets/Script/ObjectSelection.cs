@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectSelection : MonoBehaviour
 {
@@ -7,10 +8,31 @@ public class ObjectSelection : MonoBehaviour
     private Vector3 touchOffset;
     public GameObject cameraEmpty;
     public GameObject selectionButton;
+    public GameObject rotateButton;
     public Material selectionMaterial;
+
+    public GameObject Slider;
+    public Slider scaleSlider;
+    public float minScale = 0.5f;
+    public float maxScale = 3f;
 
     private Renderer selectedRenderer;
     private Material originalMaterial;
+
+    private Vector3 initialScale;
+    private Vector3 centerPosition;
+
+
+    private void Start()
+    {
+        GameObject[] selectableObjects = GameObject.FindGameObjectsWithTag("Selectable");
+
+        foreach (GameObject selectableObject in selectableObjects)
+        {
+            initialScale = selectableObject.transform.localScale;
+            centerPosition = selectableObject.transform.position;
+        }
+    }
 
     private void Update()
     {
@@ -67,12 +89,15 @@ public class ObjectSelection : MonoBehaviour
                 selectedObject = null;
             }
         }
+
     }
 
     private void SelectObject(GameObject obj)
     {
         cameraEmpty.SetActive(false);
         selectionButton.SetActive(true);
+        rotateButton.SetActive(true);
+        Slider.SetActive(true);
 
         // Stocker le matériau d'origine de l'objet sélectionné, sauf s'il a déjà été sélectionné
         selectedRenderer = obj.GetComponent<Renderer>();
@@ -80,7 +105,6 @@ public class ObjectSelection : MonoBehaviour
         {
             originalMaterial = selectedRenderer.material;
             Debug.Log("Storing original material: " + originalMaterial.name);
-
         }
 
         // Appliquer le matériau de sélection à l'objet, sauf s'il a déjà été sélectionné
@@ -90,13 +114,14 @@ public class ObjectSelection : MonoBehaviour
         }
     }
 
-
     public void DeselectObject(GameObject obj)
     {
         Debug.Log("Deselecting object: " + obj.name);
 
         cameraEmpty.SetActive(true);
         selectionButton.SetActive(false);
+        rotateButton.SetActive(false);
+        Slider.SetActive(false);
 
         // Restaurer le matériau d'origine de l'objet désélectionné
         if (selectedRenderer != null && selectedRenderer.material != selectionMaterial)
@@ -110,7 +135,26 @@ public class ObjectSelection : MonoBehaviour
         originalMaterial = null;
     }
 
+    public void OnSliderChanged()
+    {
+        if(selectedObject != null) { 
+            float newScale = Mathf.Lerp(minScale, maxScale, scaleSlider.value);
+            selectedObject.transform.localScale = initialScale * newScale;
+            selectedObject.transform.position = centerPosition - (selectedObject.transform.localScale - initialScale) / 2f;
+        }
+    }
 
+    public void DeleteSelectedObject()
+    {
+        // Vérifier si un objet est actuellement sélectionné
+        if (ObjectSelection.selectedObject != null)
+        {
+            // Supprimer l'objet sélectionné
+            Destroy(ObjectSelection.selectedObject);
+            ObjectSelection.selectedObject = null;
+            cameraEmpty.SetActive(true);
+        }
+    }
 
     public void RotateSelectedObjects()
     {
